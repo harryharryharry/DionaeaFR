@@ -43,19 +43,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 [*] Changelog:
 
   27/01/2019
-	- Forked & addressed multiple deprecated functions used by DionaeaFR (Special thanks to 'Dependency Hell™'). 
-		Major changes:
-		./Web/views/connection.py		replaced deprecated instances of 'render_to_response' with 'render'
-		./Web/views/map.py				"	"
-		./Web/views/graph.py				"	"
-		./Web/views/download.py				"	"
-		./DionaeaFR/Templates/base.html		workaround to allow styles.less being loaded
-		./DionaeaFR/Templates/table.html	removed instances of the deprecated {% nospaceless %} and {% endnospaceless %}
-		./DionaeaFR/settings.py			refactored TEMPLATE_ entries and added ALLOWED_HOSTS due to deprecations)
-		./DionaeaFR/urls.py			removed deprecated 'patterns' module
-
-	- TODO: 'Connections' & 'Downloads' tabs still throw a 'Django error'-page. I've created an issue with more info,
-		Maybe someone more knowledgeable can chime in.
+	- Forked & addressed multiple deprecated functions used by DionaeaFR (Special thanks to 'Dependency Hell™').  
 
   30/11/2012
 	- Add transport, type and protocol filters in connections table.
