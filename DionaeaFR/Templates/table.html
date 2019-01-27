@@ -3,7 +3,6 @@
     {% load i18n %}
     {% block table %}
         <table {% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
-            {% nospaceless %}
                 {% block table.thead %}
                     <thead>
                     <tr>
@@ -43,7 +42,6 @@
                 {% block table.tfoot %}
                     <tfoot></tfoot>
                 {% endblock table.tfoot %}
-            {% endnospaceless %}
         </table>
     {% endblock table %}
 
@@ -54,19 +52,19 @@
                     <div class="pagination pagination-centered">
                         <ul>
                             {% if table.page.has_previous %}
-                                {% nospaceless %}{% block pagination.previous %}
+                                {% block pagination.previous %}
                                     <li class="previous">
                                     <a href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}">{% trans "Previous" %}</a>
-                                    </li>{% endblock pagination.previous %}{% endnospaceless %}
+                                    </li>{% endblock pagination.previous %}
                             {% else %}
                                 <li class="previous disabled"><a href="">Previous</a></li>
                             {% endif %}
 
                             {% if table.page.has_next %}
-                                {% nospaceless %}{% block pagination.next %}
+                                    {% block pagination.next %}
                                     <li class="next">
                                     <a href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">{% trans "Next" %}</a>
-                                    </li>{% endblock pagination.next %}{% endnospaceless %}
+                                    </li>{% endblock pagination.next %}
                             {% else %}
                                 <li class="next disabled"><a href="">Previous</a></li>
                             {% endif %}

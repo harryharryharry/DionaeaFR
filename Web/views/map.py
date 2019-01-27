@@ -11,9 +11,10 @@ except ImportError:
     print "\tpip install pygeoip"
     pass
 
-from django.template import RequestContext
+#from django.template import RequestContext
+from django.shortcuts import render
 from django.conf import settings
-from django.shortcuts import render_to_response
+#from django.shortcuts import render_to_response
 
 from Web.models.connection import Connection
 
@@ -68,12 +69,12 @@ def countriesMap(request):
             str(data[country])
         )
     var = var.rstrip(',') + "};"
-    return render_to_response(
+    return render(
+	request,
         'maps/countries.html',
         {
             'cc': var
         },
-        context_instance=RequestContext(request)
     )
 
 
@@ -107,12 +108,12 @@ def attackersMap(request):
                     str(c)
                 )
     var = var.rstrip(',') + "];"
-    return render_to_response(
+    return render(
+	request,
         'maps/attackers.html',
         {
             'attackers': var
         },
-        context_instance=RequestContext(request)
     )
 
 # vim: set expandtab:ts=4

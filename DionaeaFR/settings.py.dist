@@ -4,7 +4,10 @@ import os
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
+
+#LOCAL IP OF DIONAEA HONEYPOT
+ALLOWED_HOSTS = ['192.168.1.XXX']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -14,12 +17,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/var/lib/dionaea/logsql.sqlite',
-        'USER': '',  # Not used with sqlite3.
-        'PASSWORD': '',  # Not used with sqlite3.
-        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',		# ADD 'postgresql_psycopg2', 'mysql', 'sqlite3' OR 'oracle'.
+        'NAME': '/var/lib/dionaea/logsql.sqlite',	# CHANGE TO LOCATION WHERE DIONAEA LOG IS LOCATED
+        'USER': '',					# NOT USED WITH SQLITE3.
+        'PASSWORD': '',					# NOT USED WITH SQLITE3.
+        'HOST': '',					# NOT USED WITH SQLITE3. SET TO EMPTY STRING FOR LOCALHOST.
+        'PORT': '',					# NOT USED WITH SQLITE3. SET TO EMPTY STRING FOR DEFAULT.
     },
     'OPTIONS': {
         'timeout': 60,
@@ -27,7 +30,7 @@ DATABASES = {
 }
 
 # How many days (going backwards) worth of results to show
-RESULTS_DAYS = 14 
+RESULTS_DAYS = 14
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -92,19 +95,6 @@ STATICFILES_FINDERS = (
 SECRET_KEY = 'o*w2sbrhS_LKSQwx_dmlslsdmcx,c,k!(el0^qx5dljbv6eyjwx)(76^wppdjrrxnj%wcny3h2r'
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.core.context_processors.static',
-    'django.contrib.messages.context_processors.messages',
-    'django.contrib.auth.context_processors.auth',
-    'Web.context_processors.expose_extra_settings_keys',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.gzip.GZipMiddleware',
@@ -146,12 +136,31 @@ ROOT_URLCONF = 'DionaeaFR.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'DionaeaFR.wsgi.application'
 
-TEMPLATE_DIRS = (
-    os.path.join(CURRENT_PATH, 'Templates'),
-)
+['django.template.loaders.filesystem.Loader',
+ 'django.template.loaders.app_directories.Loader']
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(CURRENT_PATH, 'Templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+		'django.template.context_processors.request',
+		'django.template.context_processors.static',
+#		'django.template.loaders.eggs.Loader',
+		'django.contrib.messages.context_processors.messages',
+		'django.contrib.auth.context_processors.auth',
+		'Web.context_processors.expose_extra_settings_keys',
+            ],
+        },
+    },
+]
 
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', 'less {infile} {outfile}'),
 )
 
 INTERNAL_IPS = ('127.0.0.1',)

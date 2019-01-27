@@ -1,0 +1,29 @@
+# Based on my output from:
+# $ pip list --user -l
+#
+# There might be some superfluous entries. 
+# Let me know if this is the case.
+aadict==0.2.3
+asset==0.6.12
+backports.functools-lru-cache==1.5
+beautifulsoup4==4.7.1
+Django==1.11.18
+django-appconf==1.0.2
+django-compressor==2.2
+django-filter==1.1.0
+django-htmlmin==0.10.0
+django-pagination==1.0.7
+django-tables2==2.0.4
+django-tables2-simplefilter==0.1
+globre==0.1.5
+html5lib==1.0.1
+netaddr==0.7.19
+optional-django==0.1.0
+pygeoip==0.3.2
+pytz==2018.9
+pysubnettree==0.28
+rcssmin==1.0.6
+rjsmin==1.0.12
+six==1.12.0
+soupsieve==1.7.3
+webencodings==0.5.1

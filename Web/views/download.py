@@ -1,6 +1,4 @@
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-
+from django.shortcuts import render
 from django_tables2 import RequestConfig
 from Web.models.download import Download
 from Web.tables.download import DownloadTable
@@ -29,16 +27,14 @@ def downloadIndex(request):
     ).configure(
         table
     )
-    return render_to_response(
+    return render(
+	request,
         'base.html',
         {
             'table': table,
             'filters': filters,
             'title': u'Downloads'
         },
-        context_instance=RequestContext(
-            request
-        )
     )
 
 # vim: set expandtab:ts=4

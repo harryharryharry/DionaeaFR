@@ -2,78 +2,64 @@ DionaeaFR
 =========
 
 Front Web to Dionaea low-interaction honeypot.
-
 Home DionaeaFR: http://rubenespadas.github.io/DionaeaFR/
-
 Home Dionaea:   http://dionaea.carnivore.it/
 
 [*] Technologies:
 
-  - Python 2.7.3
-  - Django 1.4
+  - Python 2.7.13
+  - Django 1.11.18
   - Jquery 1.7.2
   - Bootstrap Framework 2.1.1
   - jVectorMap 1.0
   - Kendo-UI v2011.3.1129
   - SQLite3
 
-[*] Requirements:
+[*] Installation:
 
-	pip install Django
-	pip install pygeoip
-	pip install django-pagination
-	pip install django-tables2
-	pip install django-compressor
-	pip install django-htmlmin
-	pip install django-filter
-	
-	django-tables2-simplefilter:
-		https://github.com/benjiec/django-tables2-simplefilter
-		python setup.py install
-	
-	SubnetTree:
-		git clone git://git.bro-ids.org/pysubnettree.git
-		python setup.py install
-	
-	nodejs:
-		http://nodejs.org/dist/v0.8.16/node-v0.10.33.tar.gz
-		tar xzvf node-v0.10.33.tar.gz
-		cd node-v0.10.33
-		./configure
-		make
-		make install
-	
-	npm install -g less
-	apt-get install python-netaddr
+	- With your distro's package manager install the packages:
+		nodejs, gcc & python2-pip
+		(with Debian derivatives install 'python-pip' instead)
 
-[*] Install
+	- Download GeoIP and GeoLiteCity and gunzip to ./DionaeaFR/static:
+		curl https://src.fedoraproject.org/lookaside/pkgs/GeoIP/GeoLiteCity.dat.gz/2ec4a73cd879adddf916df479f3581c7/GeoLiteCity.dat.gz | gunzip > ./DionaeaFR/static/GeoLiteCity.dat
+		curl https://src.fedoraproject.org/lookaside/pkgs/GeoIP/GeoIP.dat.gz/508e3c10da15f2722774cf4014863976/GeoIP.dat.gz | gunzip > ./DionaeaFR/static/GeoIP.dat
 
-  Download GeoIP and GeoLiteCity:
-  
-    wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
-    wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+	- Running a honeypot as root is not advised. Create an unprivileged user and change ownership & group of this git directory to that user:
+		useradd <user>
+		chown <user>:<user> -R <path>/DionaeaFR
+		su <user>
 
-  Decompress GeoIP and GeoLiteCity:
-  
-    gunzip GeoLiteCity.dat.gz
-    gunzip GeoIP.dat.gz
+	- With pip2 (as the unprivileged user):
+		pip2 install --user -r requirements.txt
 
-  Move GeoIP and GeoLiteCity to DionaeaFR/DionaeaFR/static:
-  
-    mv GeoIP.dat DionaeaFR/DionaeaFR/static
-	mv GeoLiteCity.dat DionaeaFR/DionaeaFR/static
+[*] Run server:
 
-  Run server:
-  
-	python manage.py collectstatic
-	python manage.py runserver 0.0.0.0:8000
+	Copy DionaeaFR/settings.py.dist to DionaeaFR/settings.py and configure it (mainly ALLOWED_HOSTS and DATABASE->NAME).
+	python2 manage.py collectstatic
+	python2 manage.py runserver 0.0.0.0:8000
+	Access to http://YOUR_IP:8000 in browser.
 
-  Access to http://YOUR_IP:8000 in browser.
+[*] Changelog:
 
-[*] Changelog
+  27/01/2019
+	- Forked & addressed multiple deprecated functions used by DionaeaFR (Special thanks to 'Dependency Hell™'). 
+		Major changes:
+		./Web/views/connection.py		replaced deprecated instances of 'render_to_response' with 'render'
+		./Web/views/map.py				"	"
+		./Web/views/graph.py				"	"
+		./Web/views/download.py				"	"
+		./DionaeaFR/Templates/base.html		workaround to allow styles.less being loaded
+		./DionaeaFR/Templates/table.html	removed instances of the deprecated {% nospaceless %} and {% endnospaceless %}
+		./DionaeaFR/settings.py			refactored TEMPLATE_ entries and added ALLOWED_HOSTS due to deprecations)
+		./DionaeaFR/urls.py			removed deprecated 'patterns' module
 
-  - Add transport, type and protocol filters in connections table.
-  - Add Attacks graph last 7 days.
+	- TODO: 'Connections' & 'Downloads' tabs still throw a 'Django error'-page. I've created an issue with more info,
+		Maybe someone more knowledgeable can chime in.
+
+  30/11/2012
+	- Add transport, type and protocol filters in connections table.
+	- Add Attacks graph last 7 days.
   
   29/11/2012
 	- Add less support
@@ -93,13 +79,14 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Fixed Graphs
   
   15/05/2013
-    - Refactoring Code
+	- Refactoring Code
 	- New filters system
 
   16/05/2013
-    - Fixed mysql_command.
-    - Add refresh interval in graphs.
+	- Fixed mysql_command.
+	- Add refresh interval in graphs.
 
-[*] Suggestions?
+[*] Suggestions? 
+    (harryharryharry: Please for the love of all that is holy - no suggestions, as I'm wholly incapable of implementing them.)
 
 Designed by @rubenespadas
