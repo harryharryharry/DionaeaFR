@@ -16,7 +16,8 @@ class MysqlCommand(models.Model):
         to_field='connection',
         db_column='connection',
         related_name='connection__connection',
-        verbose_name='Connection'
+        verbose_name='Connection',
+	on_delete=models.PROTECT
     )
 
     mysql_command_cmd = models.TextField()

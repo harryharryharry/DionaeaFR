@@ -14,7 +14,8 @@ class Login(models.Model):
         to_field='connection',
         db_column='connection',
         related_name='connection__connection',
-        verbose_name='Connection'
+        verbose_name='Connection',
+	on_delete=models.PROTECT
     )
 
     login_username = models.TextField(
