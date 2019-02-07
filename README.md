@@ -31,14 +31,21 @@ Home Dionaea:   http://dionaea.carnivore.it/
 		su <user>
 
 	- With pip2 (as the unprivileged user):
-		pip2 install --user -r requirements.txt
+		python2 -m pip2 install --user virtualenv
+		python2 -m virtualenv env
+		source env/bin/activate
+		pip2 install -r requirements.txt
+		python2 manage.py collectstatic
+		deactivate
 
 [*] Run server:
 
-	Copy DionaeaFR/settings.py.dist to DionaeaFR/settings.py and configure it (mainly ALLOWED_HOSTS and DATABASE->NAME).
-	python2 manage.py collectstatic
-	python2 manage.py runserver 0.0.0.0:8000
-	Access to http://YOUR_IP:8000 in browser.
+	- Copy DionaeaFR/settings.py.dist to DionaeaFR/settings.py and configure it (mainly ALLOWED_HOSTS and DATABASE->NAME).
+
+	- Then (as the unprivileged user):
+	source env/bin/activate
+	python2 manage.py runserver <YOUR_IP>:8000
+	Access to http://<YOUR_IP>:8000 in browser.
 
 [*] Changelog:
 
