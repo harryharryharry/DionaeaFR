@@ -31,7 +31,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 		su <user>
 
 	- With pip2 (as the unprivileged user):
-		python2 -m pip2 install --user virtualenv
+		pip2 install --user virtualenv
 		python2 -m virtualenv env
 		source env/bin/activate
 		pip2 install -r requirements.txt
