@@ -96,7 +96,7 @@ SECRET_KEY = 'o*w2sbrhS_LKSQwx_dmlslsdmcx,c,k!(el0^qx5dljbv6eyjwx)(76^wppdjrrxnj
 
 # List of callables that know how to import templates from various sources.
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.gzip.GZipMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,7 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'pagination.middleware.PaginationMiddleware',
+#    'pagination.middleware.PaginationMiddleware',
 )
 
 ANTIVIRUS_VIRUSTOTAL = 'Sophos'
